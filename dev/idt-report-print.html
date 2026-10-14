@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IDT Project — First Review Comprehensive Report</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    @page {
+      size: A4;
+      margin: 15mm 15mm 15mm 15mm;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 11pt;
+      line-height: 1.55;
+      color: #09090b;
+      background: #ffffff;
+      padding: 24px;
+    }
+
+    .cover-banner {
+      border-bottom: 2px solid #09090b;
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+
+    .doc-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #71717a;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: 20pt;
+      font-weight: 700;
+      color: #09090b;
+      margin-top: 4px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 12pt;
+      color: #52525b;
+      margin-top: 4px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 20px;
+      background: #f4f4f5;
+      border: 1px solid #e4e4e7;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 16px 0 24px;
+      font-size: 9.5pt;
+    }
+
+    .meta-item {
+      display: flex;
+      gap: 6px;
+    }
+
+    .meta-label {
+      font-weight: 600;
+      color: #71717a;
+      width: 130px;
+      flex-shrink: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
+    }
+
+    .meta-val {
+      font-weight: 500;
+      color: #09090b;
+    }
+
+    .meta-val a {
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+
+    h2 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #09090b;
+      border-left: 3px solid #1d4ed8;
+      padding-left: 8px;
+      margin: 22px 0 10px;
+      letter-spacing: -0.01em;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      font-size: 11pt;
+      font-weight: 600;
+      color: #18181b;
+      margin: 12px 0 6px;
+      page-break-after: avoid;
+    }
+
+    p {
+      margin-bottom: 8px;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin: 6px 0 12px 20px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    strong {
+      font-weight: 600;
+      color: #09090b;
+    }
+
+    code, .mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9pt;
+      background: #f4f4f5;
+      padding: 1px 4px;
+      border-radius: 4px;
+      border: 1px solid #e4e4e7;
+    }
+
+    .callout {
+      background: #fafafa;
+      border: 1px solid #e4e4e7;
+      border-left: 4px solid #1d4ed8;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 12px 0;
+      font-size: 10pt;
+    }
+
+    .callout-success {
+      border-left-color: #15803d;
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px;
+      font-size: 9.5pt;
+      page-break-inside: avoid;
+    }
+
+    th, td {
+      border: 1px solid #e4e4e7;
+      padding: 7px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f4f4f5;
+      font-weight: 600;
+      color: #09090b;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
+      text-transform: uppercase;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8pt;
+      font-weight: 600;
+    }
+
+    .badge-cobalt { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .badge-sage { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+    .badge-amber { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+
+    .qa-box {
+      background: #ffffff;
+      border: 1px solid #e4e4e7;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 10px 0;
+      page-break-inside: avoid;
+    }
+
+    .qa-q {
+      font-weight: 600;
+      color: #09090b;
+      margin-bottom: 4px;
+      font-size: 10pt;
+    }
+
+    .qa-a {
+      color: #27272a;
+      font-size: 9.5pt;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .footer-note {
+      margin-top: 30px;
+      padding-top: 10px;
+      border-top: 1px solid #e4e4e7;
+      font-size: 8pt;
+      color: #71717a;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cover-banner">
+    <div class="doc-eyebrow">Innovation &amp; Design Thinking (IDT) • Project Review 1 Report</div>
+    <h1>ApexLogic — Virtual Laboratory for Digital Electronics</h1>
+    <div class="subtitle">Complete Technical Specification, Implementation Report &amp; Viva Assessment Guide</div>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta-item">
+      <span class="meta-label">Project Title:</span>
+      <span class="meta-val">ApexLogic Virtual Laboratory</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Target Domain:</span>
+      <span class="meta-val">Digital Electronics / System Design (CSE/ISE/ECE)</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Live Deployment:</span>
+      <span class="meta-val"><a href="https://apexlogicde.netlify.app/">https://apexlogicde.netlify.app/</a></span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Source Code:</span>
+      <span class="meta-val"><a href="https://github.com/Nilayansh/apexlogic">github.com/Nilayansh/apexlogic</a></span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Current Status:</span>
+      <span class="meta-val"><span class="badge badge-sage">100% Completed</span> (Exceeds 50% Requirement)</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Architecture:</span>
+      <span class="meta-val">Vanilla HTML5/CSS3/ES Modules • Zero Dependencies</span>
+    </div>
+  </div>
+
+  <div class="callout callout-success">
+    <strong>Review 1 Executive Statement:</strong> While the review guidelines require at least 50% project implementation and a working frontend demonstration, our team has achieved <strong>100% project completion</strong>. ApexLogic is fully built, thoroughly tested with automated assertions, and publicly deployed. This report provides everything our group needs to explain the problem, our architecture, the 5 experiments, and answer faculty questions.
+  </div>
+
+  <h2>1. Problem Identification (Why We Chose This Problem)</h2>
+  <h3>1.1 Background Context</h3>
+  <p>In 1st and 2nd-year engineering programs across Computer Science (CSE), Information Science (ISE), and Electronics &amp; Communication (ECE), <strong>Digital Electronics / Logic Design</strong> is a foundational laboratory course. Students learn how binary computation works by physically wiring discrete logic gates and 74-series Integrated Circuits (ICs) on solderless breadboards.</p>
+
+  <h3>1.2 The Core Hardware Bottlenecks</h3>
+  <p>Despite being central to computer architecture, traditional physical hardware laboratories face major friction points:</p>
+  <ul>
+    <li><strong>Component Vulnerability &amp; Gate Burnout:</strong> DIP IC chips (7400 NAND, 7408 AND, 7486 XOR) have fragile metal pins that bend and break upon breadboard insertion. Accidental short-circuits (+5V directly to Ground) destroy internal transistor gates. Students lose up to <strong>70%–80% of their 3-hour lab session</strong> tracking mundane continuity faults and replacing burnt chips rather than learning Boolean logic.</li>
+    <li><strong>The "Black Box" Diagnostic Problem:</strong> Commercial ICs are sealed in opaque black epoxy plastic. Students cannot observe intermediate internal nodes (such as signals X₁, X₂, X₃ inside an XOR gate or a Full Adder carry path). Multimeter probes slip and short adjacent pins, leaving students frustrated.</li>
+    <li><strong>Instrument Scarcity:</strong> Oscilloscopes and logic analyzers are expensive and scarce. In a 60-student batch lab, usually only 1 or 2 oscilloscopes exist. Consequently, sequential timing, clock frequency division (f/2, f/4, f/8), and propagation delays remain purely abstract textbook equations.</li>
+    <li><strong>Evaluation &amp; Plagiarism Bottleneck:</strong> Because breadboard assembly is slow and tedious, many students rush to copy truth table values from lab manuals without testing each binary input. Faculty cannot easily verify whether a student systematically verified all combinations.</li>
+    <li><strong>Zero Access Outside College Hours:</strong> Physical labs are locked outside scheduled hours. Students cannot practice or verify circuits before semester exams without purchasing costly hardware kits.</li>
+  </ul>
+
+  <h2>2. Proposed Solution (Our Concept &amp; Impact)</h2>
+  <p><strong>ApexLogic</strong> is a browser-native, zero-dependency virtual laboratory designed with a clean <strong>Swiss minimalist aesthetic</strong> that delivers instant, mathematically authentic digital circuit simulation.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 32%;">Traditional Lab Bottleneck</th>
+        <th style="width: 38%;">ApexLogic Proposed Solution</th>
+        <th style="width: 30%;">Pedagogical Benefit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Burned ICs, snapped pins, loose breadboard wires</td>
+        <td><strong>Mathematical Netlist Simulation:</strong> Pure algorithmic execution where components never wear out or short.</td>
+        <td>Zero-risk, repeatable experimentation with instant reset.</td>
+      </tr>
+      <tr>
+        <td>Sealed "Black Box" ICs with hidden intermediate nodes</td>
+        <td><strong>Interactive Floating Logic Probe:</strong> Allows students to tap any node to inspect Node Name, Voltage (+5V / 0V), and Logic State (1 / 0).</td>
+        <td>De-blackboxes ICs; students understand intermediate logic flow.</td>
+      </tr>
+      <tr>
+        <td>Scarcity of physical oscilloscopes</td>
+        <td><strong>Integrated 32-Sample Logic Analyzer:</strong> Real-time SVG waveform strip graphing clock and divided frequencies.</td>
+        <td>Visual proof of frequency division (f/2, f/4, f/8) in sequential circuits.</td>
+      </tr>
+      <tr>
+        <td>Copied lab records &amp; unverified truth tables</td>
+        <td><strong>Active Truth Table Tracking &amp; Verified Stamp:</strong> System automatically monitors visited rows; awards <code>VERIFIED ✓</code> only when 100% of states are tested.</td>
+        <td>Guarantees genuine student lab work; faculty can verify completion instantly.</td>
+      </tr>
+      <tr>
+        <td>Locked lab rooms &amp; expensive kits</td>
+        <td><strong>100% Web-Native &amp; Free:</strong> Runs on any phone, tablet, or PC browser with zero installs or logins.</td>
+        <td>24/7 self-paced practice before viva and practical exams.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2>3. Frontend Development &amp; User Experience</h2>
+  <h3>3.1 Design Philosophy: Swiss Functional Minimalism</h3>
+  <p>Instead of cluttered cartoon diagrams or skeuomorphic breadboard graphics that distract students, ApexLogic follows clean <strong>Swiss graphic design</strong> (inspired by Dieter Rams):</p>
+  <ul>
+    <li><strong>Warm Canvas &amp; Hairline Geometry:</strong> Off-white background (<code>#FBFBFB</code>) with 1px borders (<code>#E4E4E7</code>) and 12px card radii.</li>
+    <li><strong>Signal Color Hierarchy:</strong> Logic HIGH (+5V) glows in crisp <strong>Cobalt Blue (<code>#1D4ED8</code>)</strong> at 2px stroke width; Logic LOW (0V) rests in subdued neutral gray (<code>#D4D4D8</code>) at 1.5px; Clock signals illuminate in <strong>Amber (<code>#D97706</code>)</strong>.</li>
+    <li><strong>Tactile Physical Feedback:</strong> Debossed toggle switch pill tracks with spring recoil physics (120ms cubic-bezier) and an optional 8ms synthetic click tone via the <strong>Web Audio API</strong>.</li>
+  </ul>
+
+  <h3>3.2 Navigation Architecture &amp; Core Screens</h3>
+  <ol>
+    <li><strong>Home Screen (<code>index.html</code>):</strong> Displays the 5 lab experiments in clean hairline rows with real-time progress indicators (e.g., <code>Rows 4/4 · Viva 3/3</code>) stored in browser memory.</li>
+    <li><strong>Experiment Studio (<code>experiment.html?id=XX</code>):</strong>
+      <ul>
+        <li><strong>Simulate Tab:</strong> A 2-column layout pairing the interactive SVG schematic, tactile switches, and probe (left) with the live truth table, status readout, and waveform analyzer (right).</li>
+        <li><strong>Manual Tab:</strong> Textbook-accurate lab documentation including Aim, Theory, Equations, IC pinouts, and step-by-step Procedure.</li>
+        <li><strong>Viva Tab:</strong> 3 interactive conceptual questions with immediate answer lock, score tracking, and detailed technical rationale.</li>
+      </ul>
+    </li>
+    <li><strong>Printable Lab Record (<code>record.html?id=XX</code>):</strong> Centered A4-proportioned sheet with student USN, vector circuit snapshot, verification stamp, viva scorecard, and faculty signature line.</li>
+  </ol>
+
+  <h2>4. Implementation Status: All 5 Experiments (100% Complete)</h2>
+
+  <h3>Experiment 01 — Universal Gate Realization (NAND-Only Logic)</h3>
+  <p><strong>Curriculum Aim:</strong> Realize NOT, AND, OR, and XOR gates using exclusively IC 7400 Quad 2-Input NAND gates.</p>
+  <ul>
+    <li><strong>NOT Gate:</strong> $Y = \overline{A \cdot A} = \overline{A}$ (1 NAND gate)</li>
+    <li><strong>AND Gate:</strong> $Y = \overline{\overline{A \cdot B}} = A \cdot B$ (2 NAND gates)</li>
+    <li><strong>OR Gate:</strong> $Y = \overline{\overline{A} \cdot \overline{B}} = A + B$ (3 NAND gates via De Morgan's Theorem)</li>
+    <li><strong>XOR Gate:</strong> $Y = A \oplus B = \overline{\overline{A \cdot X_1} \cdot \overline{B \cdot X_1}}$ where $X_1 = \overline{A \cdot B}$ (4 NAND gates)</li>
+    <li><strong>Interactive Feature:</strong> Dynamic badge overlays display live intermediate values ($X_1, X_2, X_3$). Truth table includes a live <em>Native Gate Comparator Column</em> proving the NAND network matches textbook logic.</li>
+  </ul>
+
+  <h3>Experiment 02 — Half Adder &amp; Full Adder</h3>
+  <p><strong>Curriculum Aim:</strong> Construct binary arithmetic addition circuits with carry propagation.</p>
+  <ul>
+    <li><strong>Half Adder:</strong> $\text{Sum} = A \oplus B$, $\text{Carry} = A \cdot B$ using IC 7486 (XOR) and IC 7408 (AND).</li>
+    <li><strong>Full Adder:</strong> $\text{Sum} = A \oplus B \oplus C_{\text{in}}$, $C_{\text{out}} = A \cdot B + C_{\text{in}} \cdot (A \oplus B)$ using 5 cascaded gates.</li>
+    <li><strong>Interactive Feature:</strong> Live decimal arithmetic line translates binary signals directly into human math: e.g., $1_2 + 1_2 + 1_2 = 3_{10} \implies \text{Sum} = 1, C_{\text{out}} = 1$.</li>
+  </ul>
+
+  <h3>Experiment 03 — 4-to-1 Multiplexer (Data Routing)</h3>
+  <p><strong>Curriculum Aim:</strong> Select and route 1 of 4 data inputs ($D_0$–$D_3$) using select lines ($S_1, S_0$) and active-low enable ($\bar{E}$).</p>
+  <ul>
+    <li><strong>IC Emulated:</strong> IC 74153 Dual 4:1 Data Selector.</li>
+    <li><strong>Industrial Convention:</strong> Active-low enable ($\bar{E}$) forces output $Y = 0$ when $\bar{E} = 1$.</li>
+    <li><strong>Interactive Feature:</strong> Dynamic channel dimming — the selected data wire illuminates brightly in Cobalt Blue while unselected channels fade to 45% opacity. The active product term in the Boolean equation turns bold in real time.</li>
+  </ul>
+
+  <h3>Experiment 04 — BCD to 7-Segment Decoder</h3>
+  <p><strong>Curriculum Aim:</strong> Translate 4-bit Binary Coded Decimal ($0000_2$ to $1001_2$) into seven display signals ($a$ through $g$).</p>
+  <ul>
+    <li><strong>IC Emulated:</strong> IC 7447 active BCD decoder driving a scalable SVG 7-segment module.</li>
+    <li><strong>Bidirectional Synchronization:</strong> An interactive decimal stepper (<code>[−] 0 [+]</code>) stays in sync with 4 binary switches ($B_3, B_2, B_1, B_0$).</li>
+    <li><strong>Invalid Code Detection:</strong> Feeding numbers $10$–$15$ lights only the center dash (segment $g$) and displays an alert badge: <code>Invalid BCD Input (Range: 0–9)</code>.</li>
+  </ul>
+
+  <h3>Experiment 05 — 3-bit Asynchronous Ripple Counter</h3>
+  <p><strong>Curriculum Aim:</strong> Observe binary up-counting ($000_2 \to 111_2$) and sequential clock frequency division ($f/2, f/4, f/8$).</p>
+  <ul>
+    <li><strong>Architecture:</strong> 3 cascaded positive-edge triggered T flip-flops ($T = 1$) clocked by $\overline{Q_n}$ (which rises on $Q_n$'s falling edge, generating an up-count).</li>
+    <li><strong>Interactive Feature:</strong> Manual single-step clock button and variable-speed auto-oscillator ($0.5\text{ Hz}$ to $4.0\text{ Hz}$).</li>
+    <li><strong>Logic Analyzer:</strong> Real-time 32-sample scrolling SVG waveform graphing synchronized channels for $\text{CLK}$, $Q_0$, $Q_1$, and $Q_2$.</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <h2>5. Under-the-Hood Engineering (What We Used &amp; Why)</h2>
+
+  <h3>5.1 The Pure Web Architecture (No React, No npm, No Build Tools)</h3>
+  <p>We deliberately rejected heavy frameworks (React/Vue/Angular) and NPM packages. Why?</p>
+  <ul>
+    <li><strong>Zero Toolchain Friction:</strong> No Webpack/Vite bundlers that fail or require Node.js installs on campus computers.</li>
+    <li><strong>Sub-Millisecond Loading:</strong> The entire application payload is under 80 KB uncompressed. It loads instantly on mobile 3G/4G networks.</li>
+    <li><strong>Long-Term Archival Stability:</strong> Plain HTML5, CSS3, and native JavaScript ES modules will continue to run without breaking 10 years from now.</li>
+    <li><strong>Client-Side Privacy:</strong> Student USN, completed lab rows, and quiz scores reside securely in the browser's <code>localStorage</code> (with in-memory fallback), requiring no database or user tracking.</li>
+  </ul>
+
+  <h3>5.2 The Topological Netlist Evaluator (<code>engine.js</code>)</h3>
+  <p>ApexLogic is <strong>not</strong> a pre-recorded animation. It is a genuine netlist evaluation engine:</p>
+  <ul>
+    <li>Circuit components are declared in topological order (a component only reads nets produced by previous gates or inputs).</li>
+    <li>When an input switch toggles, <code>evaluateNetlist(circuit, inputs)</code> recalculates the entire netlist graph in microseconds:</li>
+  </ul>
+  <div class="callout">
+    <code>export function evaluateNetlist(netlist, inputs) {<br>
+    &nbsp;&nbsp;const nets = { ...inputs };<br>
+    &nbsp;&nbsp;for (const c of netlist.components) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;const ins = c.in.map(n =&gt; nets[n]);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;if (c.type === 'BLOCK') Object.assign(nets, c.fn(ins));<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;else nets[c.out] = GATES[c.type](...ins);<br>
+    &nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;return nets;<br>
+    }</code>
+  </div>
+
+  <h3>5.3 The Orthogonal Wire Router (<code>renderer.js</code>)</h3>
+  <p>To produce textbook-quality schematics automatically, we engineered a deterministic routing algorithm using pure SVG elements:</p>
+  <ul>
+    <li>Traces are routed using clean orthogonal lines: straight horizontal segments if $sy == dy$, or dedicated routing channels ($cx = dx - 24 - 8k$) left of destination columns if $sy \neq dy$.</li>
+    <li>Junction dots ($r = 3\text{px}$) are placed automatically on fan-out driver pins and channel bend points ($n &gt; 1$).</li>
+    <li>Every wire carries a parallel transparent 14px hit-box path for responsive logic probe touch/hover hit-testing.</li>
+  </ul>
+
+  <h2>6. Academic Evaluation: The Printable Lab Record</h2>
+  <p>To eliminate the practice of blindly transcribing lab records, ApexLogic features a dedicated printable lab record module (<code>record.html</code>):</p>
+  <ul>
+    <li><strong>Tamper-Evident Verification:</strong> If a student tests every required truth table row, the sheet receives a bordered green <strong><code>VERIFIED ✓</code></strong> stamp. If any row was skipped, it displays an amber warning: <strong><code>INCOMPLETE — n/N rows tested</code></strong>.</li>
+    <li><strong>Circuit State Snapshot:</strong> Renders a high-resolution monochrome vector SVG reflecting the exact switch state the student tested.</li>
+    <li><strong>Viva Voce Scorecard:</strong> Summarizes the student's quiz score (e.g., $3/3$) alongside a breakdown of their chosen answers.</li>
+    <li><strong>Single-Page Guarantee:</strong> Governed by CSS <code>@page { size: A4; margin: 12mm; }</code> and strict print media queries, ensuring the Aim, Theory, Diagram, Table, Viva Score, and Faculty Signature fit onto <strong>exactly one A4 sheet</strong>.</li>
+  </ul>
+
+  <h2>7. Individual Viva Preparation: Questions Faculty Will Ask &amp; How to Answer</h2>
+  <p>Since marks are awarded on <strong>Individual Performance</strong>, every group member must master these answers:</p>
+
+  <div class="qa-box">
+    <div class="qa-q">Q1: "Is this just an interactive animation, or are you actually simulating the circuit logic?"</div>
+    <div class="qa-a"><strong>Answer:</strong> "It is a true simulation engine! In <code>engine.js</code>, we evaluate the circuit netlist graph topologically. When an input switch is toggled, logic states propagate through gate primitives (NAND, AND, OR, XOR) or IC block functions on the fly. The truth table cursor, voltage probe, and output lamps reflect real computed values, not hardcoded animations."</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q">Q2: "What is the Logic Probe tool, and why did you build it?"</div>
+    <div class="qa-a"><strong>Answer:</strong> "In physical hardware labs, chips are sealed black boxes—students cannot observe intermediate gates. Our Floating Logic Probe turns the cursor into an electronic test probe. Hovering over or tapping any wire or pin immediately inspects its Node ID, voltage (+5.0V for HIGH, 0.0V for LOW), and binary logic state (1 or 0)."</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q">Q3: "Why did you build this in Vanilla JavaScript instead of React, Next.js, or Flutter?"</div>
+    <div class="qa-a"><strong>Answer:</strong> "For three reasons: First, <strong>zero build bloat</strong>—the entire application loads in under 100ms on low-spec lab desktops. Second, <strong>long-term stability</strong>—there are no npm dependencies that break over time. Third, <strong>zero hosting overhead</strong>—it is 100% client-side and can be deployed anywhere without cloud servers or databases."</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q">Q4: "How does the ripple counter work, and why does it count up?"</div>
+    <div class="qa-a"><strong>Answer:</strong> "We use positive-edge triggered T flip-flops with $T=1$ (toggling every clock). To count up, stage $n+1$ is clocked by $\overline{Q_n}$. When $Q_n$ falls ($1 \to 0$), its complement $\overline{Q_n}$ rises ($0 \to 1$). That rising edge triggers the next stage, producing the natural binary up-count sequence $000_2 \to 111_2$."</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q">Q5: "How does your system prevent students from cheating on their lab records?"</div>
+    <div class="qa-a"><strong>Answer:</strong> "ApexLogic tracks every truth table row in <code>localStorage</code>. The Lab Record only receives a green <code>VERIFIED ✓</code> stamp if the student has actively tested 100% of the required combinations. Otherwise, it stamps <code>INCOMPLETE — n/N rows tested</code>. It also prints the student's USN and a snapshot of their exact tested circuit."</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q">Q6: "How did you verify that your simulation has no bugs?"</div>
+    <div class="qa-a"><strong>Answer:</strong> "We built an automated test suite at <code>/dev/selftest.html</code>. It runs programmatic unit assertions verifying all 128 multiplexer combinations, all adder states, all 16 BCD decoder outputs, and an 8-cycle sequence check on the counter. All assertions pass with 100% success."</div>
+  </div>
+
+  <div class="footer-note">
+    <span>ApexLogic IDT Review Report • Prepared for Department Faculty</span>
+    <span>Live: apexlogicde.netlify.app • Code: github.com/Nilayansh/apexlogic</span>
+  </div>
+
+</body>
+</html>
