@@ -1,0 +1,23 @@
+:root {
+  /* surfaces */
+  --canvas: #FBFBFB;
+  --pane: #F4F4F5;
+  --border: #E4E4E7;
+  /* ink */
+  --ink: #09090B;
+  --muted: #71717A;
+  /* signal */
+  --sig-low: #D4D4D8;      /* stroke-width 1.5 */
+  --sig-high: #1D4ED8;     /* stroke-width 2   (single choice: cobalt) */
+  --amber: #D97706;        /* clock / pending */
+  --sage: #15803D;         /* verified */
+  --danger: #B91C1C;       /* error badge text only */
+  /* type */
+  --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  /* shape */
+  --radius: 12px;
+  --radius-sm: 8px;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --spring: cubic-bezier(.34, 1.4, .64, 1);
+}

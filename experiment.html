@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment — ApexLogic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/print.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="main-container">
+    <!-- Page Title Block -->
+    <div style="margin-bottom: 24px;">
+      <span class="eyebrow" id="exp-eyebrow">EXPERIMENT 01</span>
+      <h1 id="exp-title" style="margin-top: 4px;">Universal Gate Realization</h1>
+      <span class="eyebrow" id="exp-category" style="margin-top: 4px; color: var(--sig-high);">Universal Logic</span>
+    </div>
+
+    <!-- Tabs List -->
+    <div class="tab-list" role="tablist">
+      <button type="button" class="tab-btn active" role="tab" id="tab-btn-simulate" aria-controls="panel-simulate" aria-selected="true">Simulate</button>
+      <button type="button" class="tab-btn" role="tab" id="tab-btn-manual" aria-controls="panel-manual" aria-selected="false">Manual</button>
+      <button type="button" class="tab-btn" role="tab" id="tab-btn-viva" aria-controls="panel-viva" aria-selected="false">Viva</button>
+    </div>
+
+    <!-- Tab 1: Simulate -->
+    <div class="tab-panel" id="panel-simulate" role="tabpanel" aria-labelledby="tab-btn-simulate">
+      <!-- Mode Switcher (if > 1 mode) -->
+      <div id="mode-switcher-container"></div>
+
+      <div class="simulate-grid">
+        <!-- Left Column: Canvas Card -->
+        <div class="card canvas-card" id="canvas-card">
+          <div class="canvas-toolbar">
+            <div class="canvas-mode-equation" id="canvas-equation"></div>
+            <div class="toolbar-actions">
+              <button type="button" class="btn btn-ghost btn-toggle" id="probe-toggle-btn" aria-pressed="false">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                Probe
+              </button>
+            </div>
+          </div>
+
+          <!-- Input Array (tactile switches / clock controls) -->
+          <div id="canvas-inputs-container"></div>
+
+          <!-- SVG Circuit Schematic -->
+          <div class="svg-circuit-wrapper" id="circuit-svg-container"></div>
+
+          <!-- Output Array (lamps / 7-seg badge / decimal readout) -->
+          <div id="canvas-outputs-container"></div>
+        </div>
+
+        <!-- Right Column: Verification Card -->
+        <div class="card verification-card">
+          <!-- Section 1: Truth Table -->
+          <div class="verif-section" id="truth-table-container"></div>
+
+          <!-- Section 2: Status List -->
+          <div class="verif-section">
+            <div class="verif-header-line">
+              <span class="eyebrow">Circuit Status</span>
+            </div>
+            <div class="status-list" id="status-list-container"></div>
+          </div>
+
+          <!-- Section 3: Waveform Strip (Exp 05 only) -->
+          <div class="verif-section" id="waveform-section" style="display: none;">
+            <div class="verif-header-line">
+              <span class="eyebrow">Logic Analyzer</span>
+            </div>
+            <div id="waveform-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Manual -->
+    <div class="tab-panel" id="panel-manual" role="tabpanel" aria-labelledby="tab-btn-manual" hidden>
+      <div class="manual-content" id="manual-content-container"></div>
+    </div>
+
+    <!-- Tab 3: Viva -->
+    <div class="tab-panel" id="panel-viva" role="tabpanel" aria-labelledby="tab-btn-viva" hidden>
+      <div id="viva-content-container"></div>
+    </div>
+  </main>
+
+  <script type="module" src="assets/js/page-experiment.js"></script>
+</body>
+</html>

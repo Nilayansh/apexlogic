@@ -1,0 +1,229 @@
+/* Print Stylesheet & Record Page Styles */
+
+.record-page-body {
+  background-color: var(--pane);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px;
+}
+
+.record-toolbar {
+  width: 100%;
+  max-width: 794px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.record-sheet {
+  width: 100%;
+  max-width: 794px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--ink);
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 8px;
+}
+
+.record-title {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.record-date {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* 2x2 Student Grid */
+.record-student-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+  font-size: 13px;
+  background-color: var(--canvas);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+}
+
+.record-student-field {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.record-field-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--muted);
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.record-field-val {
+  font-weight: 500;
+  border-bottom: 1px dotted var(--muted);
+  flex: 1;
+  min-height: 18px;
+}
+
+.record-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.record-sec-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.record-exp-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.record-aim {
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.record-equations {
+  background-color: var(--canvas);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.record-circuit-snapshot {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  max-height: 260px;
+  overflow: hidden;
+}
+
+.record-circuit-snapshot svg {
+  max-height: 240px;
+  width: auto;
+}
+
+/* Verification Stamp */
+.stamp-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.verif-stamp {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid currentColor;
+}
+
+.stamp-verified {
+  color: var(--sage);
+  background-color: #f0fdf4;
+}
+
+.stamp-incomplete {
+  color: var(--amber);
+  background-color: #fffbeb;
+}
+
+/* Record viva table */
+.record-viva-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-align: left;
+}
+
+.record-viva-table th, .record-viva-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.record-viva-table th {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.record-faculty-sig {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink);
+}
+
+@page {
+  size: A4;
+  margin: 12mm;
+}
+
+@media print {
+  body {
+    background: #fff !important;
+    padding: 0 !important;
+  }
+  .no-print, header.app-header, .record-toolbar {
+    display: none !important;
+  }
+  .record-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    max-width: none !important;
+    padding: 0 !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .record-sheet svg {
+    max-width: 100% !important;
+    max-height: 250px !important;
+    height: auto;
+  }
+  .record-sheet [stroke="var(--sig-low)"], .record-sheet .wire-low {
+    stroke: #9ca3af !important;
+  }
+  .record-sheet .wire-high {
+    stroke: #000000 !important;
+  }
+}

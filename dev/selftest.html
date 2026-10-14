@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ApexLogic Self-Test Suite</title>
+  <style>
+    body { font-family: monospace; padding: 24px; background: #fafafa; color: #111; line-height: 1.6; }
+    h1 { font-size: 20px; border-bottom: 2px solid #ddd; padding-bottom: 8px; }
+    .pass { color: #15803d; font-weight: bold; }
+    .fail { color: #b91c1c; font-weight: bold; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 6px 0; padding: 6px 12px; background: #fff; border: 1px solid #e4e4e7; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>ApexLogic Automated Verification Suite</h1>
+  <div id="summary" style="margin: 16px 0; font-size: 16px;">Running test suite...</div>
+  <ul id="results"></ul>
+
+  <script type="module">
+    import { EXPERIMENTS, getExperiment } from '../assets/js/experiments/index.js';
+    import { tick } from '../assets/js/experiments/exp05.js';
+    import { autoTable } from '../assets/js/truthtable.js';
+
+    const resultsUl = document.getElementById('results');
+    const summaryDiv = document.getElementById('summary');
+    let passed = 0;
+    let failed = 0;
+
+    function assert(desc, condition) {
+      const li = document.createElement('li');
+      if (condition) {
+        li.innerHTML = `<span class="pass">[PASS]</span> ${desc}`;
+        passed++;
+      } else {
+        li.innerHTML = `<span class="fail">[FAIL]</span> ${desc}`;
+        failed++;
+      }
+      resultsUl.appendChild(li);
+    }
+
+    try {
+      // 1. Exp 01 & Exp 02: Verification against reference for all combinations
+      ['01', '02'].forEach(expId => {
+        const exp = getExperiment(expId);
+        exp.modes.forEach(mode => {
+          const numIns = mode.inputs.length;
+          const total = 1 << numIns;
+          let allMatch = true;
+
+          for (let i = 0; i < total; i++) {
+            const inputs = {};
+            for (let b = 0; b < numIns; b++) {
+              inputs[mode.inputs[b].id] = (i >> (numIns - 1 - b)) & 1;
+            }
+            const { nets } = mode.compute(inputs);
+            const ref = mode.reference(inputs);
+
+            for (const [k, v] of Object.entries(ref)) {
+              if (nets[k] !== v) {
+                allMatch = false;
+                console.error(`Mismatch in Exp ${expId} (${mode.id}):`, inputs, 'got', nets[k], 'expected', v);
+              }
+            }
+          }
+          assert(`Exp ${expId} mode '${mode.id}': all ${total} combinations match reference model`, allMatch);
+        });
+      });
+
+      // 2. Exp 03: All 128 combinations of 4:1 Mux
+      const exp03 = getExperiment('03');
+      const muxMode = exp03.modes[0];
+      let muxValid = true;
+      for (let i = 0; i < 128; i++) {
+        const inputs = {
+          D0: (i >> 6) & 1,
+          D1: (i >> 5) & 1,
+          D2: (i >> 4) & 1,
+          D3: (i >> 3) & 1,
+          S1: (i >> 2) & 1,
+          S0: (i >> 1) & 1,
+          EN: i & 1
+        };
+        const { nets } = muxMode.compute(inputs);
+        const d = [inputs.D0, inputs.D1, inputs.D2, inputs.D3];
+        const expectedY = inputs.EN === 0 ? d[inputs.S1 * 2 + inputs.S0] : 0;
+        if (nets.Y !== expectedY) {
+          muxValid = false;
+        }
+      }
+      assert('Exp 03 4:1 MUX: all 128 input combinations route and gate correctly', muxValid);
+
+      // 3. Exp 04: BCD to 7-segment literal table verification
+      const exp04 = getExperiment('04');
+      const bcdMode = exp04.modes[0];
+      const LITERAL_SEG = {
+        0: '1111110',
+        1: '0110000',
+        2: '1101101',
+        3: '1111001',
+        4: '0110011',
+        5: '1011011',
+        6: '1011111',
+        7: '1110000',
+        8: '1111111',
+        9: '1111011'
+      };
+      let bcdValid = true;
+      for (let v = 0; v < 16; v++) {
+        const inputs = {
+          B3: (v >> 3) & 1,
+          B2: (v >> 2) & 1,
+          B1: (v >> 1) & 1,
+          B0: v & 1
+        };
+        const { nets } = bcdMode.compute(inputs);
+        const segStr = ['a','b','c','d','e','f','g'].map(s => nets[s]).join('');
+        if (v <= 9) {
+          if (segStr !== LITERAL_SEG[v]) {
+            bcdValid = false;
+            console.error(`Exp 04 mismatch for ${v}: got ${segStr}, expected ${LITERAL_SEG[v]}`);
+          }
+        } else {
+          if (segStr !== '0000001') {
+            bcdValid = false;
+            console.error(`Exp 04 invalid mismatch for ${v}: got ${segStr}, expected 0000001`);
+          }
+        }
+      }
+      assert('Exp 04 BCD Decoder: digits 0–9 and invalid codes 10–15 match test specification', bcdValid);
+
+      // 4. Exp 05: 3-bit Ripple Counter state transition 000 -> 111 -> 000
+      let counterRt = { q: [0, 0, 0], clk: 0 };
+      const expectedSequence = [1, 2, 3, 4, 5, 6, 7, 0];
+      let counterValid = true;
+      for (let step = 0; step < 8; step++) {
+        counterRt = tick(counterRt);
+        const count = counterRt.q[2] * 4 + counterRt.q[1] * 2 + counterRt.q[0];
+        if (count !== expectedSequence[step]) {
+          counterValid = false;
+          console.error(`Exp 05 step ${step}: got ${count}, expected ${expectedSequence[step]}`);
+        }
+      }
+      assert('Exp 05 Ripple Counter: 8 consecutive ticks correctly yield counts 1, 2, 3, 4, 5, 6, 7, 0', counterValid);
+
+      // 5. Viva questions: exactly 3 questions, 4 options each, correctIndex 0..3
+      let vivaValid = true;
+      EXPERIMENTS.forEach(exp => {
+        if (!exp.viva || exp.viva.length !== 3) vivaValid = false;
+        exp.viva.forEach(q => {
+          if (!q.options || q.options.length !== 4) vivaValid = false;
+          if (q.correctIndex < 0 || q.correctIndex > 3) vivaValid = false;
+          if (!q.explanation) vivaValid = false;
+        });
+      });
+      assert('All 5 Experiments: exactly 3 Viva questions with 4 options and valid answer keys', vivaValid);
+
+      // 6. Every rowKey within table bounds
+      let rowKeyValid = true;
+      EXPERIMENTS.forEach(exp => {
+        exp.modes.forEach(mode => {
+          const tableData = mode.table || autoTable(mode);
+          if (exp.id === '05') {
+            for (let q2 = 0; q2 < 2; q2++) {
+              for (let q1 = 0; q1 < 2; q1++) {
+                for (let q0 = 0; q0 < 2; q0++) {
+                  const k = mode.rowKey({}, { q: [q0, q1, q2] });
+                  if (k < 0 || k >= tableData.rows.length) rowKeyValid = false;
+                }
+              }
+            }
+          } else {
+            const numIns = mode.inputs.length;
+            const total = 1 << numIns;
+            for (let i = 0; i < total; i++) {
+              const inputs = {};
+              for (let b = 0; b < numIns; b++) {
+                inputs[mode.inputs[b].id] = (i >> (numIns - 1 - b)) & 1;
+              }
+              const k = mode.rowKey(inputs);
+              if (k < 0 || k >= tableData.rows.length) rowKeyValid = false;
+            }
+          }
+        });
+      });
+      assert('All Experiments & Modes: rowKey strictly within table bounds for all reachable inputs', rowKeyValid);
+
+      summaryDiv.innerHTML = `Tests completed: <strong>${passed} passed</strong>, <strong>${failed} failed</strong>.`;
+      if (failed === 0) {
+        summaryDiv.style.color = '#15803d';
+      } else {
+        summaryDiv.style.color = '#b91c1c';
+      }
+    } catch (err) {
+      console.error(err);
+      summaryDiv.innerHTML = `<span class="fail">Test error: ${err.message}</span>`;
+    }
+  </script>
+</body>
+</html>

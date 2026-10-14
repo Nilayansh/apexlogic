@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Record — ApexLogic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/print.css">
+</head>
+<body class="record-page-body">
+  <div class="record-toolbar no-print">
+    <a href="index.html" class="btn btn-ghost" id="record-back-link">← Back to Experiment</a>
+    <button type="button" class="btn btn-primary" id="print-sheet-btn">Print / Save as PDF</button>
+  </div>
+
+  <article class="record-sheet" id="record-sheet">
+    <!-- Header -->
+    <div class="record-header">
+      <div class="record-title">ApexLogic Lab Record</div>
+      <div class="record-date" id="record-date"></div>
+    </div>
+
+    <!-- Student Block (2x2 Grid) -->
+    <div class="record-student-grid">
+      <div class="record-student-field">
+        <span class="record-field-label">Student Name</span>
+        <span class="record-field-val" id="rec-student-name"></span>
+      </div>
+      <div class="record-student-field">
+        <span class="record-field-label">USN / Roll No</span>
+        <span class="record-field-val" id="rec-student-usn"></span>
+      </div>
+      <div class="record-student-field">
+        <span class="record-field-label">Semester / Sec</span>
+        <span class="record-field-val" id="rec-student-sem"></span>
+      </div>
+      <div class="record-student-field">
+        <span class="record-field-label">Date of Exp</span>
+        <span class="record-field-val" id="rec-exp-date"></span>
+      </div>
+    </div>
+
+    <!-- Experiment Title, Aim, Equations -->
+    <div class="record-section">
+      <div class="record-sec-title">Experiment</div>
+      <div class="record-exp-name" id="rec-exp-name"></div>
+      <p class="record-aim" id="rec-exp-aim"></p>
+      <div class="record-equations" id="rec-exp-equations"></div>
+    </div>
+
+    <!-- Circuit Snapshot -->
+    <div class="record-section">
+      <div class="record-sec-title">Circuit Schematic Snapshot</div>
+      <div class="record-circuit-snapshot" id="rec-circuit-snapshot"></div>
+    </div>
+
+    <!-- Truth Table & Verification Stamp -->
+    <div class="record-section">
+      <div class="stamp-wrapper">
+        <div class="record-sec-title">Truth Table Verification</div>
+        <div class="verif-stamp" id="rec-verif-stamp"></div>
+      </div>
+      <div class="table-scroll-container">
+        <table class="logic-table" id="rec-truth-table"></table>
+      </div>
+    </div>
+
+    <!-- Viva Breakdown -->
+    <div class="record-section">
+      <div class="record-sec-title" id="rec-viva-heading">Viva Voce</div>
+      <table class="record-viva-table" id="rec-viva-table">
+        <thead>
+          <tr>
+            <th style="width: 60px;">Q No.</th>
+            <th>Question</th>
+            <th style="width: 100px;">Your Answer</th>
+            <th style="width: 60px; text-align: center;">Result</th>
+          </tr>
+        </thead>
+        <tbody id="rec-viva-body"></tbody>
+      </table>
+    </div>
+
+    <!-- Faculty Signature -->
+    <div class="record-faculty-sig">
+      Faculty signature: ______________________
+    </div>
+  </article>
+
+  <script type="module" src="assets/js/page-record.js"></script>
+</body>
+</html>
